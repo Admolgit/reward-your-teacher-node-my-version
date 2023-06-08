@@ -16,8 +16,13 @@ const teacherSchema = new mongoose.Schema(
     password: { type: String, required: true },
     school: { type: String, required: true },
     position: { type: String },
-    startYear: { type: Number, required: true },
-    endYear: { type: Number, required: true },
+    yearsOfTeaching: { type: String, required: true },
+    nin: { type: String, required: true },
+    subjectTaught: { type: [String], required: true },
+    schoolType: { type: [String], required: true },
+    period: { type: String},
+    startYear: { type: Number },
+    endYear: { type: Number },
     balance: { type: Number, default: 0 },
     virtual_account_id: String,
     services: {
@@ -58,12 +63,18 @@ teacherSchema.method({
     const transformed = {};
     const fields = [
       "id",
+      "roleId",
       "fullName",
       "email",
       "position",
       "school",
       "startYear",
       "endYear",
+      "schoolType",
+      "yearsOfTeaching",
+      "nin",
+      "subjectTaught",
+      "period",
       "virtual_account_id",
     ];
     fields.forEach((field) => {

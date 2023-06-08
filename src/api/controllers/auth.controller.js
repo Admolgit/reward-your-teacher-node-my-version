@@ -113,7 +113,7 @@ exports.login = async (req, res, next) => {
     const { user, accessToken } = await User.findAndGenerateToken(req.body);
     const token = generateTokenResponse(user, accessToken);
     const userTransformed = user.transform();
-    return res.json({ token, user: userTransformed });
+    return res.status(200).json({ token, user: userTransformed });
   } catch (error) {
     return next(error);
   }
@@ -168,11 +168,13 @@ exports.registerTeacher = async (req, res, next) => {
       startYear,
       endYear,
       schoolType,
+      yearsOfTeaching,
       subjectTaught,
       period,
       virtual_account_id = accountId,
     } = req.body;
-    const userData = {
+
+    const teacherData = {
       email,
       fullName,
       password,
@@ -181,18 +183,28 @@ exports.registerTeacher = async (req, res, next) => {
       startYear,
       endYear,
       schoolType,
+      yearsOfTeaching,
       subjectTaught,
       period,
       virtual_account_id,
     };
-    // const user = await new User(userData).save();
-    // const userTransformed = user.transform();
-    // const token = generateTokenResponse(user, user.token());
-    // res.status(httpStatus.CREATED);
-    // return res.json({ token, user: userTransformed });
-    console.log(userData, 'passed from request');
-    const teacher = await Teacher(userData).save();
-    console.log(teacher);
+
+    console.log(teacherData, 'passed from request');
+    if (
+      !email ||
+      !fullName ||
+      !password ||
+      !school ||
+      !nin ||
+      !schoolType ||
+      !yearsOfTeaching ||
+      !subjectTaught
+    ) {
+      throw new Error('All fields are required');
+    }
+
+    const teacher = await Teacher(teacherData).save();
+    console.log(teacherData);
     const teacherTransformed = teacher.transform();
     const token = generateTokenResponse(teacher, teacher.token());
     res.status(httpStatus.CREATED);

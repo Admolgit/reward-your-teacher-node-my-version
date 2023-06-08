@@ -2,10 +2,13 @@ const express = require('express');
 const { authorize, LOGGED_USER } = require('../../middlewares/auth');
 const { saveProfile } = require('../../controllers/profile.controller');
 const controller = require('../../controllers/user.controller');
+const authController = require('../../controllers/auth.controller');
 
 const router = express.Router();
 
 router.post('/teacher/:teacherId', authorize(LOGGED_USER), saveProfile);
+
+router.post('/teacher-register', authController.registerTeacher)
 
 router.get('/teachers', authorize(LOGGED_USER), controller.getTeachers);
 
