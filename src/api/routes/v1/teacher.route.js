@@ -4,16 +4,18 @@ const { saveProfile } = require('../../controllers/profile.controller');
 const controller = require('../../controllers/user.controller');
 const authController = require('../../controllers/auth.controller');
 
-const router = express.Router();
+const teacherRouter = express.Router();
 
-router.post('/teacher/:teacherId', authorize(LOGGED_USER), saveProfile);
+teacherRouter.post('/teacher/:teacherId', authorize(LOGGED_USER), saveProfile);
 
-router.post('/teacher-register', authController.registerTeacher)
+teacherRouter.post('/teacher-register', authController.registerTeacher)
 
-router.get('/teachers', authorize(LOGGED_USER), controller.getTeachers);
+teacherRouter.get('/teacher-profile', authorize(LOGGED_USER), controller.getSingleTeacher);
 
-router.post('/totalrewardsent', authorize(LOGGED_USER), controller.totalRewardSent);
+teacherRouter.get('/teachers', authorize(LOGGED_USER), controller.getTeachers);
 
-router.post('/user-balance', authorize(LOGGED_USER), controller.getUserBalance);
+teacherRouter.post('/totalrewardsent', authorize(LOGGED_USER), controller.totalRewardSent);
 
-module.exports = router;
+teacherRouter.post('/user-balance', authorize(LOGGED_USER), controller.getUserBalance);
+
+module.exports = teacherRouter;

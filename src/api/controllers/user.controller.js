@@ -90,7 +90,8 @@ exports.update = (req, res, next) => {
   const updatedUser = omit(req.body, ommitRole);
   const user = Object.assign(req.locals.user, updatedUser);
 
-  user.save()
+  user
+    .save()
     .then((savedUser) => res.json(savedUser.transform()))
     .catch((e) => next(User.checkDuplicateEmail(e)));
 };
@@ -126,20 +127,21 @@ exports.getTeachers = async (req, res, next) => {
 // eslint-disable-next-line consistent-return
 exports.getUserBalance = async (req, res, next) => {
   try {
-    const data = await User.find({ email: req.body.email });
-    console.log(data);
-    if (!data || data[0].length === 0) {
-      return res.status(404).send('data not found');
+    const data = await User.findOne({ email: req.body.email });
+    if (!data) {
+      return res.status(404).json({ message: 'data not found' });
     }
-    return res.status(200).json(data[0].balance || 0);
+    return res.status(200).json({ balance: data.balance });
   } catch (error) {
     next(error);
   }
 };
 
+// Total reward sent by the user
 exports.totalRewardSent = async (req, res, next) => {
   try {
     const user = await User.list({ email: req.body.email });
+
     const loggedInUserId = user[0]._id;
     const rewardSent = await Transaction.find({ userId: loggedInUserId });
     let total = 0;
@@ -156,18 +158,28 @@ exports.totalRewardSent = async (req, res, next) => {
     // const newData = rewardSent.reduce((acc, curr) => acc + curr.amount, 0);
     return res.status(200).json({ total: total });
   } catch (error) {
-    return res.status(500).send(error.message);
+    return res.status(500).json({
+      message: 'Something went wrong fetching balance',
+      error: error.message,
+    });
   }
 };
 
 exports.getSingleTeacher = async (req, res, next) => {
   try {
-    const { teacherId } = req.query;
-    const teacher = await Teacher.get(teacherId);
+    const teacherId = req.query.teacherId;
+    const teacher = await Teacher.gets(teacherId);
     const transformedTeachers = teacher.transform();
-    return res.json(transformedTeachers);
+    return res.status(200).json({
+      message: 'Teacher fetched sucessfully',
+      teacher: transformedTeachers,
+    });
   } catch (error) {
-    return next(error);
+    // return next(error);
+    return res.status(500).json({
+      message: 'Something went wrong fetching teacher',
+      error: error.message,
+    });
   }
 };
 
@@ -188,7 +200,8 @@ exports.getSingleTeacher = async (req, res, next) => {
 exports.remove = (req, res, next) => {
   const { user } = req.locals;
 
-  user.remove()
+  user
+    .remove()
     .then(() => res.status(httpStatus.NO_CONTENT).end())
     .catch((e) => next(e));
 };

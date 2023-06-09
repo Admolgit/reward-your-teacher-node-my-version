@@ -1,7 +1,7 @@
 const Profile = require('../models/profile.model');
 const Teacher = require('../models/teacher.model');
 
-exports.saveProfile = async (req, res) => {
+module.exports.saveProfile = async (req, res) => {
   try {
     const {
       name,

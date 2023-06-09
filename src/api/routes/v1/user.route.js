@@ -219,6 +219,6 @@ router.post('/totalrewardsent', authorize(LOGGED_USER), controller.totalRewardSe
 
 router.post('/user-balance', authorize(LOGGED_USER), controller.getUserBalance);
 
-router.get('/teacher-profile', authorize(LOGGED_USER), controller.getSingleTeacher);
+// router.get('/teacher-profile', authorize(LOGGED_USER), controller.getSingleTeacher);
 
 module.exports = router;

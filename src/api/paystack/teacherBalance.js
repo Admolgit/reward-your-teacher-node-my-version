@@ -1,7 +1,8 @@
 const Teacher = require('../models/teacher.model');
 
-exports.getTeacherBalance = async (req, res) => {
+module.exports.getTeacherBalance = async (req, res) => {
   try {
+    console.log(req.params.id)
     const teacher = await Teacher.findOne({ _id: req.params.id });
 
     if (!teacher) {

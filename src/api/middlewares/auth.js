@@ -1,7 +1,9 @@
 const httpStatus = require('http-status');
 const passport = require('passport');
 const User = require('../models/user.model');
+const Teacher = require('../models/teacher.model');
 const APIError = require('../errors/api-error');
+// const { teacher } = require('../controllers/auth.controller');
 
 const LOGGED_USER = '_loggedUser';
 

@@ -113,6 +113,7 @@ userSchema.statics = {
    * @returns {Promise<User, APIError>}
    */
   async get(id) {
+    console.log(id, "YES")
     let user;
 
     if (mongoose.Types.ObjectId.isValid(id)) {

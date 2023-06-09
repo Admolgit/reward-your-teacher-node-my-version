@@ -106,9 +106,9 @@ teacherSchema.statics = {
    * Get user
    *
    * @param {ObjectId} id - The objectId of user.
-   * @returns {Promise<User, APIError>}
+   * @returns {Promise<Teacher, APIError>}
    */
-  async get(id) {
+  async gets(id) {
     let teacher;
     if (mongoose.Types.ObjectId.isValid(id)) {
       teacher = await this.findById(id).exec();
@@ -117,7 +117,7 @@ teacherSchema.statics = {
       return teacher;
     }
     throw new APIError({
-      message: "User does not exist",
+      message: "Teacher does not exist",
       status: httpStatus.NOT_FOUND,
     });
   },
