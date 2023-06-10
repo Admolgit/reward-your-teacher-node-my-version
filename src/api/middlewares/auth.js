@@ -28,12 +28,42 @@ const handleJWT = (req, res, next) => async (err, user, info) => {
   return next();
 };
 
+const LOGGED_TEACHER = '_loggedTeacher';
+
+const handleJWTTeacher = (req, res, next) => async (err, teacher, info) => {
+  const error = err || info;
+  const logIn = Promise.promisify(req.logIn);
+  const apiError = new APIError({
+    message: error ? error.message : 'Unauthorized',
+    status: httpStatus.UNAUTHORIZED,
+    stack: error ? error.stack : undefined,
+  });
+
+  try {
+    if (error || !teacher) throw error;
+    await logIn(teacher, { session: false });
+  } catch (e) {
+    return next(apiError);
+  }
+
+  req.teacher = teacher;
+
+  return next();
+};
+
 // exports.ADMIN = ADMIN;
 exports.LOGGED_USER = LOGGED_USER;
 
 exports.authorize = (roles = User.roles) => (req, res, next) => passport.authenticate(
   'jwt', { session: false },
   handleJWT(req, res, next, roles),
+)(req, res, next);
+
+exports.LOGGED_TEACHER = LOGGED_TEACHER;
+
+exports.authorized = (roles = Teacher.roleId) => (req, res, next) => passport.authenticate(
+  'jwt', { session: false },
+  handleJWTTeacher(req, res, next, roles),
 )(req, res, next);
 
 exports.oAuth = (service) => passport.authenticate(service, { session: false });

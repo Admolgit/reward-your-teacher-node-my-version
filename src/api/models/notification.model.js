@@ -4,7 +4,7 @@ const { ObjectId } = mongoose.Schema.Types;
 
 const notificationSchema = new mongoose.Schema(
   {
-    recieverId: {
+    senderId: {
       type: ObjectId,
       ref: 'Teacher',
     },

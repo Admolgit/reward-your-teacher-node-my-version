@@ -141,7 +141,7 @@ exports.oAuth = async (req, res, next) => {
 
 exports.teacherlogin = async (req, res, next) => {
   try {
-    const { teacher, accessToken } = await Teacher.findAndGenerateToken(
+    const { teacher, accessToken } = await Teacher.findAndGenerateTokens(
       req.body,
     );
     const token = generateTokenResponse(teacher, accessToken);

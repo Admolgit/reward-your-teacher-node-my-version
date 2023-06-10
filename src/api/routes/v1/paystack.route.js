@@ -1,5 +1,5 @@
 const express = require('express');
-const { authorize, LOGGED_USER } = require('../../middlewares/auth');
+const { authorize, LOGGED_USER, authorized, LOGGED_TEACHER } = require('../../middlewares/auth');
 const { Payment } = require('../../paystack/payment');
 const { paystackCallback } = require('../../paystack/payment');
 const { sendReward } = require('../../paystack/sendReward');
@@ -137,7 +137,7 @@ router.get('/student-balance/:id', authorize(LOGGED_USER), getWalletBalance);
    * @apiError (Unauthorized 401)  Unauthorized  Only authenticated users can access the data
    * @apiError (Forbidden 403)     Forbidden     Only admins can access the data
 */
-router.get('/teacher/:id', authorize(LOGGED_USER), getTeacherBalance);
+router.get('/teacher/:id', getTeacherBalance);
 
 /**
    * @api {Post} /v1/paystack/balance/:id Get wallet balance

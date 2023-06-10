@@ -125,9 +125,9 @@ teacherSchema.statics = {
    * Find user by email and tries to generate a JWT token
    *
    * @param {ObjectId} id - The objectId of user.
-   * @returns {Promise<User, APIError>}
+   * @returns {Promise<Teacher, APIError>}
    */
-  async findAndGenerateToken(options) {
+  async findAndGenerateTokens(options) {
     const { email, password, refreshObject } = options;
     if (!email)
       throw new APIError({
