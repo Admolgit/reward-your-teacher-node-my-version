@@ -159,6 +159,6 @@ router.get('/teacher/:id', getTeacherBalance);
 */
 router.get('/paystack/moneysent/:id', authorize(LOGGED_USER), getTotalMoneySent);
 
-router.get('/teacher-profile', authorize(LOGGED_USER), controller.getSingleTeacher);
+// router.get('/teacher-profile', authorize(LOGGED_USER), controller.getSingleTeacher);
 
 module.exports = router;

@@ -109,7 +109,7 @@ exports.sendReward = async (req, res) => {
           .replace(/\d(?=(\d{3})+\.)/g, '$&,')}`,
       };
 
-      await Notification.create(studentNotificationPayload)
+      await Notification.create(studentNotificationPayload);
     } else {
       const teacherWallet = new TeacherWallet({
         teacherId: teacher._id,
@@ -140,9 +140,9 @@ exports.sendReward = async (req, res) => {
           .replace(/\d(?=(\d{3})+\.)/g, '$&,')}`,
       };
 
-      await Notification.create(studentNotificationPayload)
+      await Notification.create(studentNotificationPayload);
     }
-    
+
     // Send data to the client
     return res.status(200).json({
       message: 'Reward sent successful',
