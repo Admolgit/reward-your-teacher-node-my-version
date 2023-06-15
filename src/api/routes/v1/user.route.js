@@ -2,6 +2,7 @@ const express = require('express');
 const validate = require('express-validation');
 const controller = require('../../controllers/user.controller');
 const { authorize, ADMIN, LOGGED_USER } = require('../../middlewares/auth');
+const { getStudentNotifications } = require('../../paystack/notification');
 const {
   listUsers,
   createUser,
@@ -218,6 +219,8 @@ router
 router.post('/totalrewardsent', authorize(LOGGED_USER), controller.totalRewardSent);
 
 router.post('/user-balance', authorize(LOGGED_USER), controller.getUserBalance);
+
+router.get('/student-notification/:senderId', getStudentNotifications)
 
 // router.get('/teacher-profile', authorize(LOGGED_USER), controller.getSingleTeacher);
 

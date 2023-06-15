@@ -19,12 +19,11 @@ exports.getTotalMoneySent = async (req, res) => {
     let total = 0;
 
     transactions.forEach((transaction) => {
-      
       if (transaction.status === 'success') {
         total += transaction.amount;
       }
     });
-    if (total === 0) {
+    if (total <= 0 || user.balance <= 0) {
       total = 0;
     } else {
       total -= user.balance;

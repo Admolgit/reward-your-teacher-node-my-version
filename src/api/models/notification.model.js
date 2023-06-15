@@ -6,7 +6,7 @@ const notificationSchema = new mongoose.Schema(
   {
     senderId: {
       type: ObjectId,
-      ref: 'Teacher',
+      ref: 'User',
     },
     content: String,
     status: {

@@ -21,6 +21,8 @@ exports.Payment = async (req, res) => {
 
     form.amount *= 100;
 
+    console.log(form, "FORM")
+
     const response = await apiPost(
       process.env.PAYSTACK_INITIALIZE_PAYMENT_URL,
       JSON.stringify(form),
@@ -43,8 +45,11 @@ exports.Payment = async (req, res) => {
       access_code: response.data.data.access_code,
     };
 
-    await Transaction.create(transationPayload);
-    return res.json({ error: false, url: response.data.data.authorization_url });
+    console.log(transationPayload, "PAYLOAD")
+
+    const savedTransaction = await Transaction.create(transationPayload);
+    console.log(savedTransaction, "Saved transaction")
+    return res.json({ error: false, url: response.data.data.authorization_url, transaction: savedTransaction});
   } catch (error) {
     return res.status(500).json({ error: error });
   }
@@ -67,16 +72,21 @@ exports.paystackCallback = async (req, res, next) => {
       'channel',
     ]);
 
+    console.log(data, "DATA")
+
     const [status, currency, channel] = data;
+
     const transaction = await Transaction.findOne({ reference });
     if (transaction.status === 'success') return res.redirect(`${process.env.FRONT_END_STUDENT_DASHBOARD}/students-dashboard`);
+
     const { userId } = transaction;
     const user = await User.findOne({ _id: userId });
     // eslint-disable-next-line no-unused-vars
+
     const saveTxnResp = await Transaction.findOneAndUpdate(
       { userId: user.id, reference },
       {
-        $set: { status },
+        $set: { status: "success" },
         // ip_address,
         reference,
         currency,
@@ -84,7 +94,10 @@ exports.paystackCallback = async (req, res, next) => {
       },
     );
 
-    if (status !== 'success') return res.redirect(`${process.env.FRONT_END_STUDENT_DASHBOARD}/students-dashboard`);
+    console.log(saveTxnResp, "TRAN");
+
+    // if (status !== 'success') return res.redirect(`${process.env.FRONT_END_STUDENT_DASHBOARD}/students-dashboard`);
+    // const transactionUpdated = await Transaction.findOne({ reference });
 
     await User.updateOne(
       { _id: user.id },
@@ -92,7 +105,7 @@ exports.paystackCallback = async (req, res, next) => {
     );
 
     const notificationPayload = {
-      receiverId: user.id,
+      senderId: user.id,
       content: `₦${transaction.amount.toFixed(
         2,
       )} has been deposited into your Wallet!.`,
