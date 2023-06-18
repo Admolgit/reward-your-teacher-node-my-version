@@ -164,6 +164,7 @@ exports.registerTeacher = async (req, res, next) => {
       fullName,
       password,
       school,
+      position,
       nin,
       startYear,
       endYear,
@@ -179,6 +180,7 @@ exports.registerTeacher = async (req, res, next) => {
       fullName,
       password,
       school,
+      position,
       nin,
       startYear,
       endYear,
@@ -195,6 +197,7 @@ exports.registerTeacher = async (req, res, next) => {
       !fullName ||
       !password ||
       !school ||
+      !position ||
       !nin ||
       !schoolType ||
       !yearsOfTeaching ||
