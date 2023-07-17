@@ -211,6 +211,11 @@
     "@babel/helper-validator-identifier" "^7.14.5"
     to-fast-properties "^2.0.0"
 
+"@colors/colors@1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@colors/colors/-/colors-1.5.0.tgz#bb504579c1cae923e6576a4f5da43d25f97bdbd9"
+  integrity sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==
+
 "@dabh/diagnostics@^2.0.2":
   version "2.0.2"
   resolved "https://registry.npmjs.org/@dabh/diagnostics/-/diagnostics-2.0.2.tgz"
@@ -452,6 +457,11 @@
   version "2.4.1"
   resolved "https://registry.npmjs.org/@types/normalize-package-data/-/normalize-package-data-2.4.1.tgz"
   integrity sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==
+
+"@types/triple-beam@^1.3.2":
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@types/triple-beam/-/triple-beam-1.3.2.tgz#38ecb64f01aa0d02b7c8f4222d7c38af6316fef8"
+  integrity sha512-txGIh+0eDFzKGC25zORnswy+br1Ha7hj5cMVwKIU7+s0U2AxxJru/jZSMU6OC9MJWP6+pc/hc6ZjyZShpsyY2g==
 
 "@types/webidl-conversions@*":
   version "6.1.1"
@@ -749,9 +759,10 @@ async@^2.6.3, async@~2.6.1:
   dependencies:
     lodash "^4.17.14"
 
-async@^3.1.0, async@^3.2.0, async@~3.2.0:
-  version "3.2.0"
-  resolved "https://registry.npmjs.org/async/-/async-3.2.0.tgz"
+async@^3.1.0, async@^3.2.0, async@^3.2.3, async@~3.2.0:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/async/-/async-3.2.4.tgz#2d22e00f8cddeb5fde5dd33522b56d1cf569a81c"
+  integrity sha512-iAB+JbDEGXhyIUavoDl9WP/Jj106Kz9DEn1DPgYw5ruDn0e3Wgi3sKFm55sASdGBNOQB8F59d9qQ7deqrHA8wQ==
 
 asynckit@^0.4.0:
   version "0.4.0"
@@ -1288,10 +1299,6 @@ color@3.0.x:
 colorette@^1.2.2:
   version "1.2.2"
   resolved "https://registry.npmjs.org/colorette/-/colorette-1.2.2.tgz"
-
-colors@^1.2.1:
-  version "1.3.2"
-  resolved "https://registry.npmjs.org/colors/-/colors-1.3.2.tgz"
 
 colorspace@1.1.x:
   version "1.1.1"
@@ -2209,10 +2216,6 @@ fast-printf@^1.3.0:
   resolved "https://registry.npmjs.org/fast-printf/-/fast-printf-1.6.5.tgz"
   dependencies:
     boolean "^3.0.2"
-
-fast-safe-stringify@^2.0.4:
-  version "2.0.6"
-  resolved "https://registry.npmjs.org/fast-safe-stringify/-/fast-safe-stringify-2.0.6.tgz"
 
 fast-safe-stringify@^2.0.7:
   version "2.0.7"
@@ -3473,14 +3476,16 @@ log-symbols@2.2.0:
   dependencies:
     chalk "^2.0.1"
 
-logform@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.npmjs.org/logform/-/logform-2.2.0.tgz"
+logform@^2.3.2, logform@^2.4.0:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/logform/-/logform-2.5.1.tgz#44c77c34becd71b3a42a3970c77929e52c6ed48b"
+  integrity sha512-9FyqAm9o9NKKfiAKfZoYo9bGXXuwMkxQiQttkT4YjjVtQVIQtK6LmVtlxmCaFswo6N4AfEkHqZTV0taDtPotNg==
   dependencies:
-    colors "^1.2.1"
-    fast-safe-stringify "^2.0.4"
+    "@colors/colors" "1.5.0"
+    "@types/triple-beam" "^1.3.2"
     fecha "^4.2.0"
     ms "^2.1.1"
+    safe-stable-stringify "^2.3.1"
     triple-beam "^1.3.0"
 
 lolex@^4.1.0, lolex@^4.2.0:
@@ -4905,7 +4910,7 @@ readable-stream@1.1.x:
     isarray "0.0.1"
     string_decoder "~0.10.x"
 
-readable-stream@^2.3.5, readable-stream@^2.3.7:
+readable-stream@^2.3.5:
   version "2.3.7"
   resolved "https://registry.npmjs.org/readable-stream/-/readable-stream-2.3.7.tgz"
   dependencies:
@@ -5075,6 +5080,11 @@ safe-buffer@5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
 safe-buffer@5.2.1, safe-buffer@^5.0.1, safe-buffer@^5.1.1, safe-buffer@^5.1.2, safe-buffer@^5.2.1:
   version "5.2.1"
   resolved "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz"
+
+safe-stable-stringify@^2.3.1:
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/safe-stable-stringify/-/safe-stable-stringify-2.4.3.tgz#138c84b6f6edb3db5f8ef3ef7115b8f55ccbf886"
+  integrity sha512-e2bDA2WJT0wxseVd4lsDP4+3ONX6HpMXQa1ZhFQ7SU+GjvORCmShbCMltrtIDfkYhVHrOcPtj+KhmDBdPdZD1g==
 
 "safer-buffer@>= 2.1.2 < 3", "safer-buffer@>= 2.1.2 < 3.0.0", safer-buffer@^2.0.2, safer-buffer@^2.1.0, safer-buffer@^2.1.2:
   version "2.1.2"
@@ -5634,7 +5644,7 @@ trim-newlines@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/trim-newlines/-/trim-newlines-2.0.0.tgz"
 
-triple-beam@^1.2.0, triple-beam@^1.3.0:
+triple-beam@^1.3.0:
   version "1.3.0"
   resolved "https://registry.npmjs.org/triple-beam/-/triple-beam-1.3.0.tgz"
 
@@ -5981,26 +5991,31 @@ window-size@0.1.0:
   version "0.1.0"
   resolved "https://registry.npmjs.org/window-size/-/window-size-0.1.0.tgz"
 
-winston-transport@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.npmjs.org/winston-transport/-/winston-transport-4.4.0.tgz"
+winston-transport@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/winston-transport/-/winston-transport-4.5.0.tgz#6e7b0dd04d393171ed5e4e4905db265f7ab384fa"
+  integrity sha512-YpZzcUzBedhlTAfJg6vJDlyEai/IFMIVcaEZZyl3UXIl4gmqRpU7AE89AHLkbzLUsv0NVmw7ts+iztqKxxPW1Q==
   dependencies:
-    readable-stream "^2.3.7"
-    triple-beam "^1.2.0"
+    logform "^2.3.2"
+    readable-stream "^3.6.0"
+    triple-beam "^1.3.0"
 
-winston@^3.1.0, winston@^3.3.3:
-  version "3.3.3"
-  resolved "https://registry.npmjs.org/winston/-/winston-3.3.3.tgz"
+winston@^3.10.0, winston@^3.3.3:
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/winston/-/winston-3.10.0.tgz#d033cb7bd3ced026fed13bf9d92c55b903116803"
+  integrity sha512-nT6SIDaE9B7ZRO0u3UvdrimG0HkB7dSTAgInQnNR2SOPJ4bvq5q79+pXLftKmP52lJGW15+H5MCK0nM9D3KB/g==
   dependencies:
+    "@colors/colors" "1.5.0"
     "@dabh/diagnostics" "^2.0.2"
-    async "^3.1.0"
+    async "^3.2.3"
     is-stream "^2.0.0"
-    logform "^2.2.0"
+    logform "^2.4.0"
     one-time "^1.0.0"
     readable-stream "^3.4.0"
+    safe-stable-stringify "^2.3.1"
     stack-trace "0.0.x"
     triple-beam "^1.3.0"
-    winston-transport "^4.4.0"
+    winston-transport "^4.5.0"
 
 with@^5.0.0:
   version "5.1.1"
